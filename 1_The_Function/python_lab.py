@@ -105,7 +105,7 @@ exclude_zero_list = [(i,j,k) for  i in S for j in S for k in S if (i+j+k) == 0 a
 ## 15: (Task 0.5.16) One nontrivial three-element tuple summing to zero
 S = {-4, -2, 1, 2, 5, 0}
 # Replace ... with a one-line expression that uses a list comprehension in which S appears
-first_of_tuples_list = [exclude_zero_list[0]]
+first_of_tuples_list = [(i,j,k) for  i in S for j in S for k in S if (i+j+k) == 0 and ( i !=0 or j !=0 or k != 0)][0]
 
 
 ## 16: (Task 0.5.17) List and set differ
@@ -116,7 +116,7 @@ example_L = [1,1,2]
 
 ## 17: (Task 0.5.18) Odd numbers
 # Replace {...} with a one-line set comprehension over a range of the form range(n)
-odd_num_list_range = {...}
+odd_num_list_range = {x for x in range(100) if x%2 == 1}
 
 
 
@@ -124,7 +124,8 @@ odd_num_list_range = {...}
 # In the line below, replace ... with an expression that does not include a comprehension.
 # Instead, it should use zip and range.
 # Note: zip() does not return a list. It returns an 'iterator of tuples'
-range_and_zip = ...
+L = ['A', 'B', 'C', 'D', 'E']
+range_and_zip = list(zip(range(5), L))
 
 
 
@@ -134,7 +135,7 @@ B = [1, 15, 20]
 # Replace [...] with a one-line comprehension that uses zip together with the variables A and B.
 # The comprehension should evaluate to a list whose ith element is the ith element of
 # A plus the ith element of B.
-list_sum_zip = [...]
+list_sum_zip = [x+y for (x,y) in zip(A,B)]
 
 
 
@@ -143,7 +144,7 @@ dlist = [{'James':'Sean', 'director':'Terence'}, {'James':'Roger', 'director':'L
 k = 'James'
 # Replace [...] with a one-line comprehension that uses dlist and k
 # and that evaluates to ['Sean','Roger','Pierce']
-value_list = [...]
+value_list = [x[k] for x in dlist]
 
 
 
@@ -151,22 +152,22 @@ value_list = [...]
 dlist = [{'Bilbo':'Ian','Frodo':'Elijah'},{'Bilbo':'Martin','Thorin':'Richard'}]
 k = 'Bilbo'
 #Replace [...] with a one-line comprehension 
-value_list_modified_1 = [...] # <-- Use the same expression here
+value_list_modified_1 = [(x[k] if k in x else 'NOT PRESENT') for x in dlist] # <-- Use the same expression here
 k = 'Frodo'
-value_list_modified_2 = [...] # <-- as you do here
+value_list_modified_2 = [(x[k] if k in x else 'NOT PRESENT') for x in dlist] # <-- as you do here
 
 
 
 ## 22: (Task 0.5.23) A dictionary mapping integers to their squares
 # Replace {...} with a one-line dictionary comprehension
-square_dict = {...}
+square_dict = {x:x**2 for x in range(100)}
 
 
 
 ## 23: (Task 0.5.24) Making the identity function
 D = {'red','white','blue'}
 # Replace {...} with a one-line dictionary comprehension
-identity_dict = {...}
+identity_dict = {x:x for x in D}
 
 
 
@@ -176,7 +177,7 @@ digits = set(range(base))
 # Replace { ... } with a one-line dictionary comprehension
 # Your comprehension should use the variables 'base' and 'digits' so it will work correctly if these
 # are assigned different values (e.g. base = 2 and digits = {0,1})
-representation_dict = { ... }
+representation_dict = {x:[(x//base**2), (x//base)%base, x%base] for x in range(min(base**3,10000))}
 
 
 
@@ -184,19 +185,19 @@ representation_dict = { ... }
 id2salary = {0:1000.0, 1:1200.50, 2:990}
 names = ['Larry', 'Curly', 'Moe']
 # Replace { ... } with a one-line dictionary comprehension that uses id2salary and names.
-listdict2dict = { ... }
+listdict2dict = {names[k]:s for (k,s) in id2salary.items()}
 
 
 
 ## 26: (Task 0.5.28) Procedure nextInts
 # Complete the procedure definition by replacing [ ... ] with a one-line list comprehension
-def nextInts(L): return [ ... ]
+def nextInts(L): return [ x+1 for x in L]
 
 
 
 ## 27: (Task 0.5.29) Procedure cubes
 # Complete the procedure definition by replacing [ ... ] with a one-line list comprehension
-def cubes(L): return [ ... ] 
+def cubes(L): return [ x**3 for x in L ] 
 
 
 
@@ -205,7 +206,7 @@ def cubes(L): return [ ... ]
 # Output: the list L such that L[i] is the value associated in dct with keylist[i]
 # Example: dict2list({'a':'A', 'b':'B', 'c':'C'},['b','c','a']) should equal ['B','C','A']
 # Complete the procedure definition by replacing [ ... ] with a one-line list comprehension
-def dict2list(dct, keylist): return [ ... ]
+def dict2list(dct, keylist): return [ dct[x] for x in keylist ]
 
 
 
@@ -214,11 +215,11 @@ def dict2list(dct, keylist): return [ ... ]
 # Output: the dictionary that maps keylist[i] to L[i] for i=0,1,...len(L)-1
 # Example: list2dict(['A','B','C'],['a','b','c']) should equal {'a':'A', 'b':'B', 'c':'C'}
 # Complete the procedure definition by replacing { ... } with a one-line dictionary comprehension
-def list2dict(L, keylist): return { ... }
+def list2dict(L, keylist): return { k:l for (k,l) in zip(keylist, L)}
 
 
 
 ## 30: (Task 0.5.32) Generating all three-digit numbers over a given base
 # Complete the procedure definition by replacing { ... } with a one-line set comprehension
-def all_3_digit_numbers(base, digits): return { ... }
+def all_3_digit_numbers(base, digits): return { x for x in range(base**digits) }
 

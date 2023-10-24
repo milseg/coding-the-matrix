@@ -12,7 +12,7 @@ def movie_review(name):
     Input: the name of a movie
     Output: a string (one of the review options), selected at random using randint
     """
-    return ...
+    return ['See it!', 'Agem!', 'Ideological claptrap!'][randint(0,2)]
 
 
 
@@ -31,7 +31,13 @@ def makeInverseIndex(strlist):
     >>> makeInverseIndex(['hello world','hello','hello cat','hellolot of cats']) == {'hello': {0, 1, 2}, 'cat': {2}, 'of': {3}, 'world': {0}, 'cats': {3}, 'hellolot': {3}}
     True
     """
-    pass
+    ret = {}
+    for (k, d) in enumerate(strlist):
+        for w in d.split():
+            if w not in ret.keys():
+                ret[w] = set()
+            ret[w].add(k)
+    return ret
 
 
 
@@ -52,7 +58,10 @@ def orSearch(inverseIndex, query):
     >>> idx == makeInverseIndex(['Johann Sebastian Bach', 'Johannes Brahms', 'Johann Strauss the Younger', 'Johann Strauss the Elder', ' Johann Christian Bach',  'Carl Philipp Emanuel Bach'])
     True
     """
-    pass
+    ret = set()
+    for w in query:
+        ret = ret | inverseIndex[w]
+    return ret
 
 
 
@@ -73,5 +82,11 @@ def andSearch(inverseIndex, query):
     >>> idx == makeInverseIndex(['Johann Sebastian Bach', 'Johannes Brahms', 'Johann Strauss the Younger', 'Johann Strauss the Elder', ' Johann Christian Bach',  'Carl Philipp Emanuel Bach'])
     True
     """
-    pass
+    if(len(query) < 1):
+        return set()
+    ret = inverseIndex[query[0]]
+    for k in range(1, len(query)):
+        ret = ret & inverseIndex[query[k]]
+    return ret
+
 
