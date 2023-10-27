@@ -38,7 +38,7 @@ def create_voting_dict(strlist):
     The lists for each senator should preserve the order listed in voting data.
     In case you're feeling clever, this can be done in one line.
     """
-    pass
+    return {x[0]:[int(v) for v in x[3:]] for x in [s.split(' ') for s in strlist]}
 
 
 
@@ -60,7 +60,7 @@ def policy_compare(sen_a, sen_b, voting_dict):
         
     You should definitely try to write this in one line.
     """
-    pass
+    return sum([x*y for x,y in zip(voting_dict[sen_a], voting_dict[sen_b])])
 
 
 
@@ -84,8 +84,16 @@ def most_similar(sen, voting_dict):
 
     Note that you can (and are encouraged to) re-use your policy_compare procedure.
     """
-    
-    return ""
+    m = -float('inf')
+    x = ""
+    for k in voting_dict.keys():
+        if k == sen:
+            continue
+        c = policy_compare(sen, k, voting_dict)
+        if c > m:
+            m = c
+            x = k
+    return x
 
 
 
@@ -106,13 +114,48 @@ def least_similar(sen, voting_dict):
         >>> least_similar('c', vd)
         'b'
     """
-    pass
+    m = float('inf')
+    x = ""
+    for k in voting_dict.keys():
+        if k == sen:
+            continue
+        c = policy_compare(sen, k, voting_dict)
+        if c < m:
+            m = c
+            x = k
+    return x
 
 
+def least_similar_tup(sen, voting_dict):
+    """
+    Input: the last name of a senator, and a dictionary mapping senator names
+           to lists representing their voting records.
+    Output: the last name of the senator whose political mindset is least like the input
+            senator.
+    Example:
+        >>> vd = {'a': [1,1,1], 'b': [1,-1,0], 'c': [-1,0,0]}
+        >>> least_similar('a', vd)
+        'c'
+        >>> vd == {'a': [1,1,1], 'b': [1,-1,0], 'c': [-1,0,0]}
+        True
+        >>> vd = {'a': [-1,0,0], 'b': [1,0,0], 'c': [-1,1,0], 'd': [-1,1,1]}
+        >>> least_similar('c', vd)
+        'b'
+    """
+    m = float('inf')
+    x = ""
+    for k in voting_dict.keys():
+        if k == sen:
+            continue
+        c = policy_compare(sen, k, voting_dict)
+        if c < m:
+            m = c
+            x = k
+    return (x, m)
 
 ## 5: (Task 2.12.5) Chafee, Santorum
-most_like_chafee    = ''
-least_like_santorum = '' 
+most_like_chafee    = 'Jeffords'
+least_like_santorum = 'Feingold' 
 
 
 
@@ -131,9 +174,17 @@ def find_average_similarity(sen, sen_set, voting_dict):
         >>> vd == {'Klein':[1,1,1], 'Fox-Epstein':[1,-1,0], 'Ravella':[-1,0,0], 'Oyakawa':[-1,-1,-1], 'Loery':[0,1,1]}
         True
     """
-    return ...
+    d = len(sen_set)-1
+    sm = 0
+    for s in sen_set:
+        if s == sen:
+            continue
+        if s not in voting_dict.keys():
+            continue
+        sm += policy_compare(sen, s, voting_dict)
+    return sm/d
 
-most_average_Democrat = ... # give the last name (or code that computes the last name)
+most_average_Democrat = 'Biden'# give the last name (or code that computes the last name)
 
 
 
@@ -160,10 +211,21 @@ def find_average_record(sen_set, voting_dict):
         >>> find_average_record({'a'}, d)
         [0.0, 1.0, 1.0]
     """
-    return ...
+    n = len(sen_set)
+    a = [0,0,0]
+    for k in sen_set:
+        if k not in voting_dict.keys():
+            continue
+        a[0] += voting_dict[k][0]
+        a[1] += voting_dict[k][1]
+        a[2] += voting_dict[k][2]
+    a[0] /= n
+    a[1] /= n
+    a[2] /= n
+    return a
 
-average_Democrat_record = ... # give the vector as a list
-
+average_Democrat_record = [-0.16279069767441862, -0.23255813953488372, 1.0]# give the vector as a list
+#most similar to the average record: Akaka
 
 
 ## 8: (Task 2.12.9) Bitter Rivals
@@ -179,5 +241,13 @@ def bitter_rivals(voting_dict):
         >>> br == ('Fox-Epstein', 'Oyakawa') or br == ('Oyakawa', 'Fox-Epstein')
         True
     """
-    return (..., ...)
+    lt = ("", "")
+    lt_s = float('infinity')
+    for i in voting_dict.keys():
+        sen, sc = least_similar_tup(i, voting_dict)
+        if sc < lt_s:
+            lt_s = sc
+            lt = (i, sen)
+    return lt
 
+#bitter rivals: ('Feingold', 'Inhofe')
