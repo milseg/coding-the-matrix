@@ -1,5 +1,32 @@
 # Copyright 2013 Philip N. Klein
 from vec import Vec
+from vec import zero_vec
+
+#quiz 4.1.1
+def quiz411():
+    return [[0 for j in range(4)] for i in range(3)]
+
+#quiz 4.1.2
+def quiz412():
+    return [[i-j for i in range(3)] for j in range(4)]
+
+#quiz 4.1.7 - identity matrix
+def quiz417():
+    return Mat(({'a','b','c'},{'a','b','c'}),{('a','a'):1,('b','b'):1,('c','c'):1})
+
+#quiz 4.1.8 - identity
+'''def identity(D):
+    return Mat((D, D), {d:1 for d in D})
+'''
+#quiz 4.1.9
+'''def mat2rowdict(M):
+    return {r:Vec(M.D[1], {c: M.f[(r,c)] for c in M.D[1] if (r,c) in M.f.keys()}) for r in M.D[0]}
+
+def mat2coldict(M):
+    return {c:Vec(M.D[0], {r: M[r,c] for r in M.D[0]}) for c in M.D[1]}
+'''
+
+
 
 #Test your Mat class over R and also over GF(2).  The following tests use only R.
 
@@ -13,7 +40,7 @@ def getitem(M, k):
     0
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    pass
+    return M.f[k] if k in M.f else 0
 
 def equal(A, B):
     """
@@ -39,7 +66,11 @@ def equal(A, B):
     True
     """
     assert A.D == B.D
-    pass
+    for r in A.D[0]:
+        for c in A.D[1]:
+            if A[r,c] != B[r,c]:
+                return False
+    return True
 
 def setitem(M, k, val):
     """
@@ -59,7 +90,7 @@ def setitem(M, k, val):
     True
     """
     assert k[0] in M.D[0] and k[1] in M.D[1]
-    pass
+    M.f[k] = val
 
 def add(A, B):
     """
@@ -87,7 +118,7 @@ def add(A, B):
     True
     """
     assert A.D == B.D
-    pass
+    return Mat(A.D, {(i,j):A[i,j]+B[i,j] for i in A.D[0] for j in A.D[1]})
 
 def scalar_mul(M, x):
     """
@@ -101,7 +132,7 @@ def scalar_mul(M, x):
     >>> 0.25*M == Mat(({1,3,5}, {2,4}), {(1,2):1.0, (5,4):0.5, (3,4):0.75})
     True
     """
-    pass
+    return Mat(M.D, {(i,j): x*v for ((i,j),v) in M.f.items()})
 
 def transpose(M):
     """
@@ -115,7 +146,7 @@ def transpose(M):
     >>> M.transpose() == Mt
     True
     """
-    pass
+    return Mat((M.D[1],M.D[0]), {(c,r): M.f[r,c] for (r,c) in M.f})
 
 def vector_matrix_mul(v, M):
     """
@@ -142,7 +173,10 @@ def vector_matrix_mul(v, M):
     True
     """
     assert M.D[0] == v.D
-    pass
+    ret = zero_vec(M.D[1])
+    for (i,j) in M.f:
+        ret[j] += M.f[i,j]*v[i]
+    return ret
 
 def matrix_vector_mul(M, v):
     """
@@ -169,7 +203,11 @@ def matrix_vector_mul(M, v):
     True
     """
     assert M.D[1] == v.D
-    pass
+    ret = zero_vec(M.D[0])
+    for (i,j) in M.f:
+        ret[i] += M.f[i,j]*v[j]
+    return ret
+
 
 def matrix_matrix_mul(A, B):
     """
@@ -198,7 +236,14 @@ def matrix_matrix_mul(A, B):
     True
     """
     assert A.D[1] == B.D[0]
-    pass
+    ret = Mat((A.D[0], B.D[1]), {})
+    for i in A.D[0]:
+        for j in B.D[1]:
+            s = sum([A[i,k]*B[k,j] for k in A.D[1]], 0)
+            if s == 0:
+                continue
+            ret[i,j] = s
+    return ret
 
 ################################################################################
 
