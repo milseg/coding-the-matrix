@@ -6,6 +6,7 @@
 
 from mat import Mat
 from vec import Vec
+from image_mat_util import file2mat, mat2display
 import math
 
 ## Task 1
@@ -16,7 +17,7 @@ def identity():
     >>> identity() * Vec({'x','y','u'}, {'x':2, 'y':3, 'u':1}) == Vec({'x','y','u'}, {'x':2, 'y':3, 'u':1})
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): 1, ('y', 'y'): 1, ('u', 'u'): 1})
 
 ## Task 2
 def translation(alpha,beta):
@@ -28,7 +29,7 @@ def translation(alpha,beta):
     >>> translation(4,-5) * Vec({'x','y','u'}, {'x':2, 'y':3, 'u':1}) == Vec({'x','y','u'}, {'x':6, 'y':-2, 'u':1})
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): 1, ('y', 'y'): 1, ('u', 'u'): 1, ('x', 'u'): alpha, ('y', 'u'): beta})
 
 ## Task 3
 def scale(alpha, beta):
@@ -42,7 +43,8 @@ def scale(alpha, beta):
     >>> scale(0,0)*Vec({'x','y','u'}, {'x':1,'y':1,'u':1}) == Vec({'x','y','u'}, {'u':1})
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): alpha, ('y', 'y'): beta, ('u', 'u'): 1})
+
 
 ## Task 4
 def rotation(theta):
@@ -59,7 +61,8 @@ def rotation(theta):
     (rotation(3*math.pi/4) * Vec({'x','y','u'},{'x':4,'y':-3,'u':1}) - Vec({'x','y','u'},{'x':-1/math.sqrt(2), 'y':7/math.sqrt(2), 'u': 1})).is_almost_zero()
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): math.cos(theta), ('y', 'x'): math.sin(theta), ('x', 'y'): -math.sin(theta), ('y', 'y'): math.cos(theta), ('u', 'u'): 1})
+
 
 ## Task 5
 def rotate_about(theta, x, y):
@@ -70,7 +73,7 @@ def rotate_about(theta, x, y):
 >>> (rotate_about(math.pi/3, 3,4)*Vec({'x','y','u'}, {'x':1, 'y':0, 'u':1}) - Vec({'y', 'x', 'u'},{'y': 0.26794919243112214, 'x': 5.4641016151377535, 'u': 1})).is_almost_zero()
     True
     '''
-    pass
+    return translation(x, y)*rotation(theta)*translation(-x,-y)
 
 ## Task 6
 def reflect_y():
@@ -83,7 +86,8 @@ def reflect_y():
     >>> reflect_y()* Vec({'x','y','u'}, {'u':1}) == Vec({'x','y','u'},{'u':1})
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): -1, ('y', 'y'): 1, ('u', 'u'): 1})
+
 
 ## Task 7
 def reflect_x():
@@ -96,7 +100,8 @@ def reflect_x():
     >>> reflect_x()*Vec({'x','y','u'}, {'u':1}) == Vec({'x','y','u'},{'u':1})
     True
     '''
-    pass
+    return Mat(({'x','y','u'}, {'x', 'y', 'u'}), {('x', 'x'): 1, ('y', 'y'): -1, ('u', 'u'): 1})
+
 
 ## Task 8    
 def scale_color(scale_r,scale_g,scale_b):
@@ -107,7 +112,8 @@ def scale_color(scale_r,scale_g,scale_b):
     >>> scale_color(1,2,3)*Vec({'r','g','b'},{'r':1,'g':2,'b':3}) == Vec({'r','g','b'},{'r':1,'g':4,'b':9})
     True
     '''
-    pass
+    return Mat(({'r','g','b'}, {'r', 'g', 'b'}), {('r', 'r'): scale_r, ('g', 'g'): scale_g, ('b', 'b'): scale_b})
+
 
 ## Task 9
 def grayscale():
@@ -115,7 +121,17 @@ def grayscale():
     Input: None
     Output: 3x3 greyscale matrix.
     '''
-    pass
+    return scale_color(77/256, 151/256, 28/256)
+
+def quad(x,y):
+    if y > 0 and x > 0:
+        return 1
+    if y> 0 and x < 0:
+        return 2
+    if y < 0 and x < 0:
+        return 3
+    if y < 0 and x > 0:
+        return 4
 
 ## Task 10
 def reflect_about(x1, y1, x2, y2):
@@ -128,6 +144,27 @@ def reflect_about(x1, y1, x2, y2):
     >>> (reflect_about(0,0,1,1) * Vec({'x','y','u'}, {'x':1, 'u':1}) - Vec({'x', 'u', 'y'},{'u': 1, 'y': 1})).is_almost_zero()
     True
     '''
-    pass
+    xp = x2 - x1
+    yp = y2 - y1
+    if xp == 0:
+        return reflect_y()
+    if yp == 0:
+        return reflect_x()
+    #xp == 0 and yp == 0 is not considered. not a line. Should be error
+    q = quad(xp, yp)
+    theta = math.atan2(abs(yp), abs(xp))
+    r_matrix = None #rotation matrix
+    ur_matrix = None #undo rotation matrix
+    ref_mat = None #reflection matrix
+    if q%2 == 0:
+        r_matrix = rotation(theta)
+        ur_matrix = rotation(-theta)
+        ref_mat = reflect_x()
+    else:
+        r_matrix = rotation(math.pi/2-theta)
+        ur_matrix = rotation(-(math.pi/2-theta))
+        ref_mat = reflect_y()
+    return translation(x1, y1)*ur_matrix*ref_mat*r_matrix*translation(-x1,-y1)
+
 
 
