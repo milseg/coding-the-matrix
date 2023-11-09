@@ -3,7 +3,7 @@
 
 from mat import Mat
 from vec import Vec
-from matutil import mat2coldict, mat2rowdict
+from matutil import mat2coldict, mat2rowdict, listlist2mat
 
 
 ## 1: (Problem 4.17.1) Computing matrix-vector products
@@ -251,16 +251,34 @@ def vM_mat_mat_mult(A, B):
     return rowdict2mat(rd_ret)
 
 
+un_strl = list(open('UN_voting_data.txt'))
+un_first = un_strl[0].split(' ')
+un_mp = {0: un_first[0]}
+rowd = set(range(len(un_first)-1))
+un_dict = {0: Vec(rowd, {k:int(un_first[k+1]) for k in range(len(rowd))})}
+for i in range(1,len(un_strl)):
+    un_sp = un_strl[i].split(' ')
+    un_mp[i] = un_sp[0]
+    un_dict[i] = Vec(rowd, {k:int(un_sp[k+1]) for k in range(len(rowd))})
+
+un_cp = {}
+for i in un_dict:
+    for j in range(i+1, len(un_strl)):
+        un_cp[i,j] = un_dict[i]*un_dict[j]
+
+sorted_cp = sorted([(value,(un_mp[x], un_mp[y])) for ((x,y), value) in un_cp.items()])
+
 
 ## 16: (Problem 4.17.19) Comparing countries using dot-product
 # Provide a set consisting of two strings
-most_opposed_pair_of_countries = {..., ...}
+most_opposed_pair_of_countries = {'Belarus', 'United_States_of_America'}#sorted_cp[0][1][0],sorted_cp[0][1][1]
 
 # Provide a ten-element list of two-element sets of strings
-most_opposed_10_pairs_of_countries = [{..., ...}, ..., {..., ...}]
+most_opposed_10_pairs_of_countries = [{'United_States_of_America', 'Belarus'}, {'United_States_of_America', 'Syria'}, {'Cuba', 'United_States_of_America'}, {'United_States_of_America', 'Algeria'}, {'Viet_Nam', 'United_States_of_America'}, {'Libya', 'United_States_of_America'}, {'Guinea', 'United_States_of_America'}, {'Mongolia', 'United_States_of_America'}, {'Mali', 'United_States_of_America'}, {'Sudan', 'United_States_of_America'}] #[{c1,c2} for (sc,(c1,c2)) in sorted_cp[:10]]
 
 # Provide a set consisting of two strings
-most_agreeing_pair_of_countries = {..., ...}
+most_agreeing_pair_of_countries = {..., ...}#sorted_cp[len(sorted_cp)-1][1][0],sorted_cp[len(sorted_cp)-1][1][1]
+
 
 
 
@@ -274,27 +292,36 @@ def dictlist_helper(dlist, k):
     >>> dictlist_helper([{'apple':'Apfel','bread':'Brot'},{'apple':'manzana', 'bread':'pan'},{'apple':'pomme','bread':'pain'}], 'apple')
     ['Apfel', 'manzana', 'pomme']
     '''
-    pass
+    return [x[k] for x in dlist]
 
+
+def solve_2x2(a,b,c,d,p,q):
+    matx = listlist2mat([[-q,p],[-b,a]])
+    maty = listlist2mat([[q,-p],[d,-c]])
+    vecx = matx*Vec({0,1}, {0:c, 1:d})
+    vecy = maty*Vec({0,1}, {0:a, 1:b})
+    return (vecx[0]/vecx[1], vecy[0]/vecy[1])
 
 
 ## 18: (Problem 4.17.21) Solving 2x2 linear systems and finding matrix inverse
-solving_systems_x1 = ...
-solving_systems_x2 = ...
-solving_systems_y1 = ...
-solving_systems_y2 = ...
-solving_systems_m = Mat(({0, 1}, {0, 1}), {...:...})
-solving_systems_a = Mat(({0, 1}, {0, 1}), {...:...})
-solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {...:...})
-solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {...:...})
+solvx = solve_2x2(3,2,4,1,1,0)
+solvy = solve_2x2(3,2,4,1,0,1)
+solving_systems_x1 = solvx[0]
+solving_systems_x2 = solvx[1]
+solving_systems_y1 = solvy[0]
+solving_systems_y2 = solvy[1]
+solving_systems_m = Mat(({0, 1}, {0, 1}), {(0,0):-0.2, (0,1):0.8, (1,0):0.4, (1,1):-0.6})
+solving_systems_a = Mat(({0, 1}, {0, 1}), {(0,0):3, (0,1):4, (1,0):2, (1,1):1})
+solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {(0,0):1,(1,1):1})
+solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {(0,0):1,(1,1):1})
 
 
 
 ## 19: (Problem 4.17.22) Matrix inverse criterion
 # Please write your solutions as booleans (True or False)
 
-are_inverses1 = ...
-are_inverses2 = ...
-are_inverses3 = ...
-are_inverses4 = ...
+are_inverses1 = True
+are_inverses2 = True
+are_inverses3 = False
+are_inverses4 = False
 
