@@ -3,7 +3,7 @@
 
 from vec import Vec
 from mat import Mat
-from matutil import rowdict2mat, mat2coldict, coldict2mat
+from matutil import rowdict2mat, mat2coldict, mat2rowdict, coldict2mat
 from solver import solve
 
 
@@ -18,6 +18,7 @@ def move2board(y):
           in whiteboard coordinates of the point p such that the line through the 
           origin and q intersects the whiteboard plane at p.
     '''
+    assert y.D == {'y1', 'y2', 'y3'}
     return Vec({'y1','y2','y3'}, {k:y[k]/y['y3'] for k in y.D})
 
 
@@ -126,8 +127,8 @@ def make_nine_equations(corners):
 ## 7: (Task 5.12.4) Build linear system
 # Apply make_nine_equations to the list of tuples specifying the pixel coordinates of the
 # whiteboard corners in the image.  Assign the resulting list of nine vectors to veclist:
-veclist = make_nine_equations([(358,360),(329,597),(592,157),(580,483)])
-#print("veclist", veclist)
+veclist = make_nine_equations([(358,36),(329,597),(592,157),(580,483)])
+#{print("veclist ", v) for v in veclist}
 
 # Build a Mat whose rows are the Vecs in veclist
 L = Mat(({i for i in range(9)}, D), {(i,k): v for i in range(len(veclist)) for k,v in veclist[i].f.items()})
@@ -140,7 +141,8 @@ L = Mat(({i for i in range(9)}, D), {(i,k): v for i in range(len(veclist)) for k
 hvec = solve(L, b)
 
 H = Mat(({'y1', 'y2', 'y3'}, {'x1', 'x2', 'x3'}), hvec.f)
-
+#mH = mat2rowdict(H)
+#{print("h ", h, ": ", mH[h]) for h in mH}
 
 
 ## 9: (Task 5.12.7) Y Board Comprehension
@@ -187,3 +189,4 @@ from image_mat_util import file2mat, mat2display
 Y_pts = H * X_pts
 Y_board = mat_move2board(Y_pts)
 mat2display(Y_board, colors, ('y1', 'y2', 'y3'), scale=100, xmin=None, ymin=None)
+

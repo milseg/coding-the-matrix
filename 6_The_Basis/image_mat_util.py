@@ -140,7 +140,8 @@ def openinbrowser(url, browser=None):
 def _create_temp(suffix='', prefix='tmp', dir=None):
     _f, path = tempfile.mkstemp(suffix, prefix, dir)
     os.close(_f)
-    _remove_at_exit(path)
+    #_remove_at_exit(path)
+    print("create_temp ", path)
     return path
 
 # Register a file to be removed at exit
