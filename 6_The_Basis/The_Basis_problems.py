@@ -218,7 +218,7 @@ def is_superfluous(L, i):
         return L[0] == Vec(L[0].D, {}) #0 zero is the linear combination of the empty set
     m = coldict2mat(L[:i]+L[i+1:])
     s = solve(m, L[i])
-    r = L[i] - s
+    r = L[i] - m*s
     r = r*r
     return abs(r) < 1e-14 #s is a valid solution. we can represent L[i] as a linear combination
 
@@ -252,15 +252,10 @@ def is_independent(L):
         >>> vlist == [Vec({0, 1, 2},{0: 1}), Vec({0, 1, 2},{1: 1}), Vec({0, 1, 2},{2: 1}), Vec({0, 1, 2},{0: 1, 1: 1, 2: 1}), Vec({0, 1, 2},{1: 1, 2: 1}), Vec({0, 1, 2},{0: 1, 1: 1})]
         True
     '''
-    #could add base cases for len(L) == 1 and L[0] = zero_vector
-    m = coldict2mat(L)
-    assert m.D[0] == L[0].D
-    s = solve(m, Vec(L[0].D, {}))
-    r = m*s
-    r = r*r
-    print("independent ", s*s)
-    return (s*s < 1e-14) or (r > 1e-14)#if solution is the zero vector or invalid then we assume only the trivial solution works and the vectors are linear independent
-
+    for i in range(len(L)):
+        if is_superfluous(L, i):
+            return False
+    return True
 
 
 
@@ -300,7 +295,7 @@ def subset_basis(T):
         True
     '''
     S = []
-    for i in range(T):
+    for i in range(len(T)):
         rem = S + T[i:]
         if is_superfluous(rem, len(S)):
             continue
