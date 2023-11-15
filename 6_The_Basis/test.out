@@ -1,0 +1,253 @@
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 236, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist)
+Expected:
+    False
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 238, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[:3])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 240, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[:2])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 242, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[1:4])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 244, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[2:5])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 246, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[2:6])
+Expected:
+    False
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 248, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[1:3])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 250, in The_Basis_problems.is_independent
+Failed example:
+    is_independent(vlist[5:])
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 204, in The_Basis_problems.is_superfluous
+Failed example:
+    is_superfluous(L,4)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.is_superfluous[2]>", line 1, in <module>
+        is_superfluous(L,4)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 221, in is_superfluous
+        r = L[i] - s
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 257, in __sub__
+        return a+(-b)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 119, in add
+        assert u.D == v.D
+    AssertionError
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 206, in The_Basis_problems.is_superfluous
+Failed example:
+    is_superfluous(L,3)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.is_superfluous[3]>", line 1, in <module>
+        is_superfluous(L,3)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 221, in is_superfluous
+        r = L[i] - s
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 257, in __sub__
+        return a+(-b)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 119, in add
+        assert u.D == v.D
+    AssertionError
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 208, in The_Basis_problems.is_superfluous
+Failed example:
+    is_superfluous(L,2)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.is_superfluous[4]>", line 1, in <module>
+        is_superfluous(L,2)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 221, in is_superfluous
+        r = L[i] - s
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 257, in __sub__
+        return a+(-b)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/vec.py", line 119, in add
+        assert u.D == v.D
+    AssertionError
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 282, in The_Basis_problems.subset_basis
+Failed example:
+    sb = subset_basis([a0, a1, a2, a3])
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[4]>", line 1, in <module>
+        sb = subset_basis([a0, a1, a2, a3])
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 303, in subset_basis
+        for i in range(T):
+    TypeError: 'list' object cannot be interpreted as an integer
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 283, in The_Basis_problems.subset_basis
+Failed example:
+    all(v in [a0, a1, a2, a3] for v in sb)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[5]>", line 1, in <module>
+        all(v in [a0, a1, a2, a3] for v in sb)
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 285, in The_Basis_problems.subset_basis
+Failed example:
+    is_independent(sb)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[6]>", line 1, in <module>
+        is_independent(sb)
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 287, in The_Basis_problems.subset_basis
+Failed example:
+    all(is_superfluous([a]+sb, 0) for a in [a0, a1, a2, a3])
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[7]>", line 1, in <module>
+        all(is_superfluous([a]+sb, 0) for a in [a0, a1, a2, a3])
+      File "<doctest The_Basis_problems.subset_basis[7]>", line 1, in <genexpr>
+        all(is_superfluous([a]+sb, 0) for a in [a0, a1, a2, a3])
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 294, in The_Basis_problems.subset_basis
+Failed example:
+    sb = subset_basis([b0, b1, b2, b3])
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[12]>", line 1, in <module>
+        sb = subset_basis([b0, b1, b2, b3])
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 303, in subset_basis
+        for i in range(T):
+    TypeError: 'list' object cannot be interpreted as an integer
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 295, in The_Basis_problems.subset_basis
+Failed example:
+    all(v in [b0, b1, b2, b3] for v in sb)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[13]>", line 1, in <module>
+        all(v in [b0, b1, b2, b3] for v in sb)
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 297, in The_Basis_problems.subset_basis
+Failed example:
+    is_independent(sb)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[14]>", line 1, in <module>
+        is_independent(sb)
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 299, in The_Basis_problems.subset_basis
+Failed example:
+    all(is_superfluous([b]+sb, 0) for b in [b0, b1, b2, b3])
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest The_Basis_problems.subset_basis[15]>", line 1, in <module>
+        all(is_superfluous([b]+sb, 0) for b in [b0, b1, b2, b3])
+      File "<doctest The_Basis_problems.subset_basis[15]>", line 1, in <genexpr>
+        all(is_superfluous([b]+sb, 0) for b in [b0, b1, b2, b3])
+    NameError: name 'sb' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 327, in The_Basis_problems.superset_basis
+Failed example:
+    sb = superset_basis([a0, a3], [a0, a1, a2])
+Expected nothing
+Got:
+    independent  0
+    independent  0
+    independent  0
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 330, in The_Basis_problems.superset_basis
+Failed example:
+    is_independent(sb)
+Expected:
+    True
+Got:
+    independent  0
+    True
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/6_The_Basis/The_Basis_problems.py", line 334, in The_Basis_problems.superset_basis
+Failed example:
+    all((not is_independent(sb+[x])) for x in [a0, a1, a2])
+Expected:
+    True
+Got:
+    independent  0
+    False
+**********************************************************************
+4 items had failures:
+   8 of  10 in The_Basis_problems.is_independent
+   3 of   8 in The_Basis_problems.is_superfluous
+   8 of  16 in The_Basis_problems.subset_basis
+   3 of   9 in The_Basis_problems.superset_basis
+***Test Failed*** 22 failures.

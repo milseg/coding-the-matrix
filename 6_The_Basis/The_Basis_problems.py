@@ -129,18 +129,18 @@ sum_to_zero_4 = [one,one,one,one,one,0,0]
 ## 11: (Problem 5.14.11) Exchange Lemma for Vectors over $\R$
 ## Please express your answer as a list of ints, such as [1,0,0,0,0]
 
-exchange_1 = [...]
-exchange_2 = [...]
-exchange_3 = [...]
+exchange_1 = [0,0,0,0,1]
+exchange_2 = [0,0,0,1,0]
+exchange_3 = [0,0,1,0,0]
 
 
 
 ## 12: (Problem 5.14.12) Exchange Lemma for Vectors over GF(2)
 # Please give the name of the vector you want to replace as a string (e.g. 'v1')
 
-replace_1 = ...
-replace_2 = ...
-replace_3 = ...
+replace_1 = 'v3'
+replace_2 = 'v1'
+replace_3 = 'v4'
 
 
 
@@ -162,7 +162,8 @@ def rep2vec(u, veclist):
         >>> rep2vec(Vec({0,1,2}, {0:2, 1:4}), [v0, v1, v2]) == Vec({'d', 'a', 'c', 'b'},{'a': 6, 'c': 0, 'b': 8, 'd': 0})
         True
     '''
-    pass
+    m = coldict2mat(veclist)
+    return m*u
 
 
 
@@ -182,7 +183,7 @@ def vec2rep(veclist, v):
         >>> vec2rep([v0,v1,v2], v)  == Vec({0, 1, 2},{0: 1.5, 1: -0.25, 2: 1.25})
         True
     '''
-    pass
+    return solve(coldict2mat(veclist), v)
 
 
 
@@ -213,7 +214,13 @@ def is_superfluous(L, i):
     >>> is_superfluous([Vec({0,1}, {0:1})], 0)
     False
     '''
-    pass
+    if len(L) == 1:
+        return L[0] == Vec(L[0].D, {}) #0 zero is the linear combination of the empty set
+    m = coldict2mat(L[:i]+L[i+1:])
+    s = solve(m, L[i])
+    r = L[i] - s
+    r = r*r
+    return abs(r) < 1e-14 #s is a valid solution. we can represent L[i] as a linear combination
 
 
 
@@ -245,7 +252,15 @@ def is_independent(L):
         >>> vlist == [Vec({0, 1, 2},{0: 1}), Vec({0, 1, 2},{1: 1}), Vec({0, 1, 2},{2: 1}), Vec({0, 1, 2},{0: 1, 1: 1, 2: 1}), Vec({0, 1, 2},{1: 1, 2: 1}), Vec({0, 1, 2},{0: 1, 1: 1})]
         True
     '''
-    pass
+    #could add base cases for len(L) == 1 and L[0] = zero_vector
+    m = coldict2mat(L)
+    assert m.D[0] == L[0].D
+    s = solve(m, Vec(L[0].D, {}))
+    r = m*s
+    r = r*r
+    print("independent ", s*s)
+    return (s*s < 1e-14) or (r > 1e-14)#if solution is the zero vector or invalid then we assume only the trivial solution works and the vectors are linear independent
+
 
 
 
@@ -284,7 +299,13 @@ def subset_basis(T):
         >>> all(is_superfluous([b]+sb, 0) for b in [b0, b1, b2, b3])
         True
     '''
-    pass
+    S = []
+    for i in range(T):
+        rem = S + T[i:]
+        if is_superfluous(rem, len(S)):
+            continue
+        S.append(T[i])
+    return S
 
 
 
@@ -313,7 +334,12 @@ def superset_basis(T, L):
         >>> all((not is_independent(sb+[x])) for x in [a0, a1, a2])
         True
     '''
-    pass
+    S = T[0:]
+    for l in L:
+        res = S + [l]
+        if is_independent(res):
+            S = res
+    return S
 
 
 
@@ -332,5 +358,8 @@ def exchange(S, A, z):
         >>> exchange(S, A, z) == Vec({0, 1, 2, 3},{0: 0, 1: 0, 2: 1, 3: 0})
         True
     '''
-    pass
+    c = vec2rep(S, z)
+    for i in c.D:
+        if c[i] > 0 and S[i] not in A:
+            return S[i]
 
