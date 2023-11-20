@@ -4,7 +4,7 @@
 from vecutil import list2vec
 from GF2 import one
 from solver import solve
-from matutil import listlist2mat, coldict2mat
+from matutil import listlist2mat, coldict2mat, mat2coldict, mat2rowdict
 from mat import Mat
 from vec import Vec
 
@@ -23,8 +23,8 @@ v2 = list2vec([0,3,3])
 # with appropriate lists of 3 vectors
 
 exchange_S0 = [w0, w1, w2]
-exchange_S1 = [...]
-exchange_S2 = [...]
+exchange_S1 = [w0, v2, w2]
+exchange_S2 = [v1, v2, w2]
 exchange_S3 = [v0, v1, v2]
 
 
@@ -39,12 +39,12 @@ v1 = list2vec([one,0,0])
 v2 = list2vec([one,one,0])
 
 exchange_2_S0 = [w0, w1, w2]
-exchange_2_S1 = [...]
-exchange_2_S2 = [...]
+exchange_2_S1 = [v0, w1, w2]
+exchange_2_S2 = [v0, v1, w2]
 exchange_2_S3 = [v0, v1, v2]
 
 
-
+from The_Basis_problems import exchange_pos, subset_basis, vec2rep
 ## 3: (Problem 6.7.4) Morph Lemma Coding
 def morph(S, B):
     '''
@@ -79,27 +79,35 @@ def morph(S, B):
         >>> sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
         True
     '''
-    pass
+    sws = []
+    for i in range(len(B)):
+        p = exchange_pos(S, B, B[i])
+        if p == -1:
+            continue
+        sws.append((B[i], S[p]))
+        S = S[:p]+[B[i]]+S[p+1:]
+    return sws
 
 
 
 ## 4: (Problem 6.7.5) Row and Column Rank Practice
 # Please express each solution as a list of Vecs
 
-row_space_1 = [...]
-col_space_1 = [...]
+row_space_1 = [Vec({0,1,2}, {0: 1, 1: 2}), Vec({0,1,2}, {1: 2, 2: 1})]
+col_space_1 = [Vec({0,1}, {0: 1, 1: 0}), Vec({0,1}, {0: 0, 1: 1})]
 
-row_space_2 = [...]
-col_space_2 = [...]
+row_space_2 = [Vec({0,1,2,3}, {0: 1, 1: 4, 2: 0, 3: 0}), Vec({0,1,2,3}, {0: 0, 1: 2, 2: 2, 3: 0}), Vec({0,1,2,3}, {0: 0, 1: 0, 2: 1, 3: 1}),]
+col_space_2 = [Vec({0,1,2}, {0: 0, 1: 0, 2: 1}), Vec({0,1,2}, {0: 0, 1: 2, 2: 1}), Vec({0,1,2}, {0: 1, 1: 0, 2: 0})]
 
-row_space_3 = [...]
-col_space_3 = [...]
+row_space_3 = [Vec({0}, {0: 1})]
+col_space_3 = [Vec({0,1,2}, {0: 1, 1: 2, 2: 3})]
 
-row_space_4 = [...]
-col_space_4 = [...]
+row_space_4 = [Vec({0,1}, {0: 1, 1: 0}), Vec({0,1}, {0: 2, 1: 1})] 
+col_space_4 = [Vec({0,1,2}, {0: 1, 1: 2, 2: 3}), Vec({0,1,2}, {0: 0, 1: 1, 2: 4})]
 
 
 
+from independence import rank
 ## 5: (Problem 6.7.6) My Is Independent Procedure
 def my_is_independent(L):
     '''
@@ -127,7 +135,7 @@ def my_is_independent(L):
         >>> L == [Vec(D,{0: 1}), Vec(D,{1: 1}), Vec(D,{2: 1}), Vec(D,{0: 1, 1: 1, 2: 1}), Vec(D,{0: 1, 1: 1}), Vec(D,{1: 1, 2: 1})]
         True
     '''
-    pass
+    return rank(L) == len(L)
 
 
 
@@ -147,16 +155,17 @@ def my_rank(L):
         >>> my_rank([list2vec(v) for v in [[1,1,1],[2,2,2],[3,3,3],[4,4,4],[123,432,123]]])
         2
     '''
-    pass
+    return len(subset_basis(L))
 
 
+## 6: (Problem 6.7.8) Use pigeonhole principle
 
 ## 7: (Problem 6.7.9) Direct Sum Validity
 # Please give each answer as a boolean
 
-only_share_the_zero_vector_1 = ...
-only_share_the_zero_vector_2 = ...
-only_share_the_zero_vector_3 = ...
+only_share_the_zero_vector_1 = True
+only_share_the_zero_vector_2 = True
+only_share_the_zero_vector_3 = True
 
 
 
@@ -199,7 +208,16 @@ def direct_sum_decompose(U_basis, V_basis, w):
         >>> w == Vec(D,{0: 2, 1: 5, 2: 0, 3: 0, 4: 1, 5: 0})
         True
     '''
-    pass
+    r = vec2rep(U_basis+V_basis, w)
+    uc = Vec(w.D, {})
+    vc = Vec(w.D, {})
+    for i in range(len(U_basis)):
+        if r[i] != 0:
+            uc = uc + r[i]*U_basis[i]
+    for i in range(len(U_basis), len(U_basis)+len(V_basis)):
+        if r[i] != 0:
+            vc = vc + r[i]*V_basis[i-len(U_basis)]
+    return (uc, vc)
 
 
 
@@ -217,7 +235,9 @@ def is_invertible(M):
     >>> is_invertible(M1)
     False
     '''
-    pass
+    if len(M.D[0]) != len(M.D[1]):
+        return False
+    return rank(list(mat2coldict(M).values())) == len(M.D[0])
 
 
 
@@ -233,10 +253,13 @@ def find_matrix_inverse(A):
         >>> find_matrix_inverse(M1) == Mat(M1.D, {(0, 1): one, (1, 0): one, (2, 2): one})
         True
     '''
-    pass
+    cd = {}
+    for i in A.D[0]:
+        m = Vec(A.D[0], {i:one})
+        cd[i] = solve(A, m)
+    return Mat((A.D[1], A.D[0]), {(i,j): cd[j][i] for j in cd for i in cd[j].f})
 
-
-
+from triangular import triangular_solve
 ## 11: (Problem 6.7.14) Inverse of a Triangular Matrix
 def find_triangular_matrix_inverse(A):
     '''
@@ -252,5 +275,11 @@ def find_triangular_matrix_inverse(A):
         >>> find_triangular_matrix_inverse(A) == Mat(({0, 1, 2, 3}, {0, 1, 2, 3}), {(0, 1): -0.5, (1, 2): -0.3, (3, 2): 0.0, (0, 0): 1.0, (3, 3): 1.0, (3, 0): 0.0, (3, 1): 0.0, (2, 1): 0.0, (0, 2): -0.05000000000000002, (2, 0): 0.0, (1, 3): -0.87, (2, 3): -0.1, (2, 2): 1.0, (1, 0): 0.0, (0, 3): -3.545, (1, 1): 1.0})
         True
     '''
-    pass
+    cd = {}
+    md = mat2rowdict(A)
+    md = [md[i] for i in range(len(A.D[0]))]
+    for i in A.D[0]:
+        u = Vec(A.D[0], {i:1})
+        cd[i] = triangular_solve(md, list(range(len(A.D[0]))), u)
+    return Mat((A.D[1], A.D[0]), {(i,j): cd[j][i] for j in cd for i in cd[j].f})
 

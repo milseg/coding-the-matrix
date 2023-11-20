@@ -1,0 +1,215 @@
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 187, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u, v) = direct_sum_decompose(U_basis, V_basis, w)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[4]>", line 1, in <module>
+        (u, v) = direct_sum_decompose(U_basis, V_basis, w)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 211, in direct_sum_decompose
+        r = vec2rep(U_basis+V_basis, w)
+    NameError: name 'vec2rep' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 188, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u + v - w).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[5]>", line 1, in <module>
+        (u + v - w).is_almost_zero()
+    NameError: name 'u' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 192, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u - U_matrix*solve(U_matrix, u)).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[8]>", line 1, in <module>
+        (u - U_matrix*solve(U_matrix, u)).is_almost_zero()
+    NameError: name 'u' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 194, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (v - V_matrix*solve(V_matrix, v)).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[9]>", line 1, in <module>
+        (v - V_matrix*solve(V_matrix, v)).is_almost_zero()
+    NameError: name 'v' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 197, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u, v) = direct_sum_decompose(U_basis, V_basis, ww)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[11]>", line 1, in <module>
+        (u, v) = direct_sum_decompose(U_basis, V_basis, ww)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 211, in direct_sum_decompose
+        r = vec2rep(U_basis+V_basis, w)
+    NameError: name 'vec2rep' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 198, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u + v - ww).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[12]>", line 1, in <module>
+        (u + v - ww).is_almost_zero()
+    NameError: name 'u' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 200, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (u - U_matrix*solve(U_matrix, u)).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[13]>", line 1, in <module>
+        (u - U_matrix*solve(U_matrix, u)).is_almost_zero()
+    NameError: name 'u' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 202, in Dimension_problems.direct_sum_decompose
+Failed example:
+    (v - V_matrix*solve(V_matrix, v)).is_almost_zero()
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.direct_sum_decompose[14]>", line 1, in <module>
+        (v - V_matrix*solve(V_matrix, v)).is_almost_zero()
+    NameError: name 'v' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 253, in Dimension_problems.find_matrix_inverse
+Failed example:
+    find_matrix_inverse(M1) == Mat(M1.D, {(0, 1): one, (1, 0): one, (2, 2): one})
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.find_matrix_inverse[1]>", line 1, in <module>
+        find_matrix_inverse(M1) == Mat(M1.D, {(0, 1): one, (1, 0): one, (2, 2): one})
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 258, in find_matrix_inverse
+        cd[i] = solve(A, m)
+    NameError: name 'cd' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 274, in Dimension_problems.find_triangular_matrix_inverse
+Failed example:
+    find_triangular_matrix_inverse(A) == Mat(({0, 1, 2, 3}, {0, 1, 2, 3}), {(0, 1): -0.5, (1, 2): -0.3, (3, 2): 0.0, (0, 0): 1.0, (3, 3): 1.0, (3, 0): 0.0, (3, 1): 0.0, (2, 1): 0.0, (0, 2): -0.05000000000000002, (2, 0): 0.0, (1, 3): -0.87, (2, 3): -0.1, (2, 2): 1.0, (1, 0): 0.0, (0, 3): -3.545, (1, 1): 1.0})
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.find_triangular_matrix_inverse[1]>", line 1, in <module>
+        find_triangular_matrix_inverse(A) == Mat(({0, 1, 2, 3}, {0, 1, 2, 3}), {(0, 1): -0.5, (1, 2): -0.3, (3, 2): 0.0, (0, 0): 1.0, (3, 3): 1.0, (3, 0): 0.0, (3, 1): 0.0, (2, 1): 0.0, (0, 2): -0.05000000000000002, (2, 0): 0.0, (1, 3): -0.87, (2, 3): -0.1, (2, 2): 1.0, (1, 0): 0.0, (0, 3): -3.545, (1, 1): 1.0})
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 279, in find_triangular_matrix_inverse
+        cd[i] = triangular_solve(A, m)
+    TypeError: triangular_solve() missing 1 required positional argument: 'b'
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 231, in Dimension_problems.is_invertible
+Failed example:
+    is_invertible(M)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.is_invertible[1]>", line 1, in <module>
+        is_invertible(M)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 240, in is_invertible
+        return rank(mat2coldict(M)) == len(M.D[0])
+      File "../resources/private/independence.py", line 85, in rank
+    AssertionError
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 235, in Dimension_problems.is_invertible
+Failed example:
+    is_invertible(M1)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.is_invertible[3]>", line 1, in <module>
+        is_invertible(M1)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 240, in is_invertible
+        return rank(mat2coldict(M)) == len(M.D[0])
+      File "../resources/private/independence.py", line 85, in rank
+    AssertionError
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 63, in Dimension_problems.morph
+Failed example:
+    morph(S, B) == [(Vec(D,{0: 1, 1: 1, 2: 0}), Vec(D,{0: 1, 1: 0, 2: 0})), (Vec(D,{0: 0, 1: 1, 2: 1}), Vec(D,{0: 0, 1: 1, 2: 0})), (Vec(D,{0: 1, 1: 0, 2: 1}), Vec(D,{0: 0, 1: 0, 2: 1}))]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[5]>", line 1, in <module>
+        morph(S, B) == [(Vec(D,{0: 1, 1: 1, 2: 0}), Vec(D,{0: 1, 1: 0, 2: 0})), (Vec(D,{0: 0, 1: 1, 2: 1}), Vec(D,{0: 0, 1: 1, 2: 0})), (Vec(D,{0: 1, 1: 0, 2: 1}), Vec(D,{0: 0, 1: 0, 2: 1}))]
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 73, in Dimension_problems.morph
+Failed example:
+    sol = morph(S, B)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[12]>", line 1, in <module>
+        sol = morph(S, B)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 74, in Dimension_problems.morph
+Failed example:
+    sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[13]>", line 1, in <module>
+        sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+    NameError: name 'sol' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 78, in Dimension_problems.morph
+Failed example:
+    sol = morph(sorted(S, key=lambda x:random()), B)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[15]>", line 1, in <module>
+        sol = morph(sorted(S, key=lambda x:random()), B)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 79, in Dimension_problems.morph
+Failed example:
+    sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[16]>", line 1, in <module>
+        sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+    NameError: name 'sol' is not defined
+**********************************************************************
+5 items had failures:
+   8 of  18 in Dimension_problems.direct_sum_decompose
+   1 of   2 in Dimension_problems.find_matrix_inverse
+   1 of   2 in Dimension_problems.find_triangular_matrix_inverse
+   2 of   4 in Dimension_problems.is_invertible
+   5 of  17 in Dimension_problems.morph
+***Test Failed*** 17 failures.

@@ -1,0 +1,65 @@
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 63, in Dimension_problems.morph
+Failed example:
+    morph(S, B) == [(Vec(D,{0: 1, 1: 1, 2: 0}), Vec(D,{0: 1, 1: 0, 2: 0})), (Vec(D,{0: 0, 1: 1, 2: 1}), Vec(D,{0: 0, 1: 1, 2: 0})), (Vec(D,{0: 1, 1: 0, 2: 1}), Vec(D,{0: 0, 1: 0, 2: 1}))]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[5]>", line 1, in <module>
+        morph(S, B) == [(Vec(D,{0: 1, 1: 1, 2: 0}), Vec(D,{0: 1, 1: 0, 2: 0})), (Vec(D,{0: 0, 1: 1, 2: 1}), Vec(D,{0: 0, 1: 1, 2: 0})), (Vec(D,{0: 1, 1: 0, 2: 1}), Vec(D,{0: 0, 1: 0, 2: 1}))]
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 73, in Dimension_problems.morph
+Failed example:
+    sol = morph(S, B)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[12]>", line 1, in <module>
+        sol = morph(S, B)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 74, in Dimension_problems.morph
+Failed example:
+    sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[13]>", line 1, in <module>
+        sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+    NameError: name 'sol' is not defined
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 78, in Dimension_problems.morph
+Failed example:
+    sol = morph(sorted(S, key=lambda x:random()), B)
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[15]>", line 1, in <module>
+        sol = morph(sorted(S, key=lambda x:random()), B)
+      File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 84, in morph
+        p = exchange_pos(S, B, B[i])
+    TypeError: list indices must be integers or slices, not Vec
+**********************************************************************
+File "/mnt/c/Users/Milton/Documents/Projetos/2023/Math/Applied Math/CodingTheMatrix/Lab/matrix/7_Dimension/Dimension_problems.py", line 79, in Dimension_problems.morph
+Failed example:
+    sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+Exception raised:
+    Traceback (most recent call last):
+      File "/home/milseg/.pyenv/versions/3.6.0/lib/python3.6/doctest.py", line 1330, in __run
+        compileflags, 1), test.globs)
+      File "<doctest Dimension_problems.morph[16]>", line 1, in <module>
+        sol == [(B[0],S[0]), (B[1],S[2]), (B[2],S[3])] or sol == [(B[0],S[1]), (B[1],S[2]), (B[2],S[3])]
+    NameError: name 'sol' is not defined
+**********************************************************************
+1 items had failures:
+   5 of  17 in Dimension_problems.morph
+***Test Failed*** 5 failures.
