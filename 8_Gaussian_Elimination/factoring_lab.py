@@ -12,6 +12,22 @@ from factoring_support import prod
 
 import echelon
 
+#Task 7.8.1
+def root_method(N):
+    a = intsqrt(N)
+    if a*a == N:
+        return a
+    a += 1
+    while True:
+        b = intsqrt(a**2-N)
+        r = a - b#also if a+b>N/2 there is no point, one of the divisors will be greater than allowed
+        if r < 2:
+            return N
+        if b*b == a**2-N:
+            return r
+        a += 1
+
+
 ## Task 1
 def int2GF2(i):
     '''
@@ -28,7 +44,7 @@ def int2GF2(i):
         >>> int2GF2(100)
         0
     '''
-    pass
+    return one if i%2 == 1 else 0
 
 ## Task 2
 def make_Vec(primeset, factors):
@@ -44,7 +60,8 @@ def make_Vec(primeset, factors):
         >>> make_Vec({2,3,11}, [(2,3), (3,2)]) == Vec({2,3,11},{2:one})
         True
     '''
-    pass
+    d = {k:int2GF2(v) for k,v in factors}
+    return Vec(primeset, d)
 
 ## Task 3
 def find_candidates(N, primeset):
@@ -82,11 +99,23 @@ def find_candidates(N, primeset):
                 Vec(D,{2: one, 3: one, 13: one})])
         True
     '''
-    pass
+    rowlist = []
+    roots = []
+    a = intsqrt(N)+2
+    while len(rowlist) < len(primeset) + 1:
+        fs = dumb_factor(a*a-N, primeset)
+        if len(fs) < 1:
+            a += 1
+            continue
+        roots.append(a)
+        rowlist.append(make_Vec(primeset, fs))
+        a += 1
+    return (roots, rowlist)
 
 
 
 ## Task 4
+#if v is a member of the NUll space of the (roots[i]*roots[i] - N) factoring matrix then c=prod(a*a - N) is a perfect square and sqrt(prod(roots))^2 - sqrt(c)^2 is a multiple of N (=k*N)
 def find_a_and_b(v, roots, N):
     '''
     Input: 
@@ -107,8 +136,17 @@ def find_a_and_b(v, roots, N):
         >>> find_a_and_b(v, roots, N)
         (4081, 1170)
     '''
-    pass
+    alist = [x for x in v.f if v.f[x] == one]
+    a = 1
+    c = 1
+    for i in alist:
+        a *= roots[i]
+        c *= roots[i]*roots[i] - N
+    b = intsqrt(c)
+    assert b*b == c
+    return (a,b)
+
 
 ## Task 5
 
-nontrivial_divisor_of_2461799993978700679 = ... 
+nontrivial_divisor_of_2461799993978700679 = 1230926561
