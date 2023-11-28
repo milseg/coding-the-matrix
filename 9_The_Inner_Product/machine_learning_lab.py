@@ -5,6 +5,11 @@ from mat import *
 from vec import *
 from cancer_data import *
 
+
+#Task 8.4.1
+A,b = read_training_data('train.data')
+w = Vec(A.D[1], {i: 1 for i in A.D[1]})
+
 ## Task 1 ##
 def signum(u):
     '''
@@ -18,7 +23,7 @@ def signum(u):
         >>> signum(Vec({1,2,3},{1:2, 2:-1})) == Vec({1,2,3},{1:1,2:-1,3:1})
         True
     '''
-    pass
+    return Vec(u.D, {i: (1 if u[i] >= 0 else -1) for i in u.D})
 
 ## Task 2 ##
 def fraction_wrong(A, b, w):
@@ -37,7 +42,18 @@ def fraction_wrong(A, b, w):
         >>> fraction_wrong(A, b, w)
         0.3333333333333333
     '''
-    pass
+    err = 0
+    v = signum(A*w)
+    for i in b.D:
+        if v[i] != b[i]:
+            err += 1
+    #a_d = v*b --> agreements - disagreements
+    #len(b.D) --> agreements + disagreements
+    #return ((len(b.D) - a_d)/2)/len(b.D) --> disagreements/total
+    return err/len(b.D)
+
+
+print("fraction wrong", fraction_wrong(A, b, w))
 
 ## Task 3 ##
 def loss(A, b, w):
@@ -55,7 +71,11 @@ def loss(A, b, w):
         >>> loss(A, b, w)
         317
     '''
-    pass
+    v = A*w - b
+    return v*v
+
+
+#print("loss ", loss(A,b,w))
 
 ## Task 4 ##
 def find_grad(A, b, w):
@@ -73,7 +93,11 @@ def find_grad(A, b, w):
         >>> find_grad(A, b, w) == Vec({'B', 'A'},{'B': -290, 'A': 60})
         True
     '''
-    pass
+    v = 2*(A*w - b)
+    v = v*A
+    return v
+
+#print("find_grad ", find_grad(A,b,w))
 
 ## Task 5 ##
 def gradient_descent_step(A, b, w, sigma):
@@ -94,7 +118,8 @@ def gradient_descent_step(A, b, w, sigma):
         >>> gradient_descent_step(A, b, w, sigma) == Vec({'B', 'A'},{'B': 27.0, 'A': -5.0})
         True
     '''
-    pass
+    g = find_grad(A,b,w)
+    return w - sigma*g
 
 ## Ungraded task ##
 def gradient_descent(A, b, w, sigma, T):
@@ -107,4 +132,27 @@ def gradient_descent(A, b, w, sigma, T):
         - T: number of iterations to run
     Output: hypothesis vector obtained after T iterations of gradient descent.
     '''
-    pass
+    for i in range(T):
+        w = gradient_descent_step(A, b, w, sigma)
+        if (i+1)%30 == 0:
+            print("loss_function", loss(A,b,w))
+            print("fraction_wrong", fraction_wrong(A,b,w))
+    return w
+
+r = gradient_descent(A,b,w,1e-9,500)
+print("corrected vector", r)
+print("    ")
+print("zero vector")
+r = gradient_descent(A,b,Vec(A.D[1], {}), 1e-9, 200)
+
+print("corrected vector", r)
+
+
+print(" ")
+print("applying to real data")
+
+
+A,b = read_training_data('validate.data')
+
+print("fraction wrong ", fraction_wrong(A,b,r))
+print("loss ", loss(A,b,r))
