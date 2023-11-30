@@ -5,32 +5,32 @@ from mat import Mat
 from vec import Vec
 from vecutil import list2vec
 from matutil import listlist2mat
-
-
+from orthogonalization import orthogonalize
+from math import sqrt
 
 ## 1: (Problem 9.11.1) Generators for orthogonal complement
 U_vecs_1 = [list2vec([0,0,3,2])]
 W_vecs_1 = [list2vec(v) for v in [[1,2,-3,-1],[1,2,0,1],[3,1,0,-1],[-1,-2,3,1]]]
 # Give a list of Vecs
-ortho_compl_generators_1 = ...
+ortho_compl_generators_1 = []#there isnt complement of 0,0,3,2 in w, because the orthorgonal complement isnt a subspace of w
 
 U_vecs_2 = [list2vec([3,0,1])]
 W_vecs_2 = [list2vec(v) for v in [[1,0,0],[1,0,1]]]
 
 # Give a list of Vecs
-ortho_compl_generators_2 = ...
+ortho_compl_generators_2 = list2vec([-1/3, 0, 1])
 
 U_vecs_3 = [list2vec(v) for v in [[-4,3,1,-2],[-2,2,3,-1]]]
 W_vecs_3 = [list2vec(v) for v in [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]]
 
 # Give a list of Vecs
-ortho_compl_generators_3 = ...
+ortho_compl_generators_3 = [list2vec(v) for v in [ [-3.5, -5, 0, 0], [-0.5, 0, 0, 1] ] ]
 
 
 
 ## 2: (Problem 9.11.3) Basis for null space
 # Your solution should be a list of Vecs
-null_space_basis = ...
+null_space_basis = [list2vec(v) for v in [[-0.75,0,1,0], [-0.5625, 0.25, 0, 1]]]
 
 
 
@@ -59,9 +59,12 @@ def orthonormalize(L):
     --------------------------
      0.528 -0.653 -0.512 0.181
     '''
-    pass
+    l = orthogonalize(L)
+    for i in range(len(l)):
+        l[i] = l[i]/sqrt(l[i]*l[i])#assuming l cant be 0 once they are linear independent
+    return l
 
-
+#print("orthonomalize", orthonormalize([list2vec(v) for v in [ [4,3,1,2], [8,9,-5,-5], [10,1,-1,5] ] ]))
 
 ## 4: (Problem 9.11.10) aug_orthonormalize(L)
 def aug_orthonormalize(L):
