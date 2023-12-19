@@ -4,8 +4,8 @@
 from mat import Mat
 from vec import Vec
 from vecutil import list2vec
-from matutil import listlist2mat
-from orthogonalization import orthogonalize
+from matutil import listlist2mat, coldict2mat
+from orthogonalization import orthogonalize, aug_orthogonalize
 from math import sqrt
 
 ## 1: (Problem 9.11.1) Generators for orthogonal complement
@@ -66,6 +66,12 @@ def orthonormalize(L):
 
 #print("orthonomalize", orthonormalize([list2vec(v) for v in [ [4,3,1,2], [8,9,-5,-5], [10,1,-1,5] ] ]))
 
+def adjust(v, multipliers):
+    for i in range(len(multipliers)):
+        v[i] *= multipliers[i]
+    return v
+
+
 ## 4: (Problem 9.11.10) aug_orthonormalize(L)
 def aug_orthonormalize(L):
     '''
@@ -108,26 +114,43 @@ def aug_orthonormalize(L):
      d  |  2 -5  5
     <BLANKLINE>
     '''
-    pass
+    Q, R = aug_orthogonalize(L)
+    m = []
+    for i in range(len(Q)):
+        q = Q[i]
+        z = sqrt(q*q)
+        m.append(z)
+        q = q/z
+        Q[i] = q
+    for i in range(len(R)):
+        R[i] = adjust(R[i], m)
+    return (Q, R)
 
-
+'''
+L = [list2vec(v) for v in [[4,3,1,2],[8,9,-5,-5],[10,1,-1,5]] ]
+Q, R = aug_orthonormalize(L)
+print(coldict2mat(Q))
+print(coldict2mat(R))
+print(coldict2mat(Q)*coldict2mat(R)-coldict2mat(L))
+'''
 
 ## 5: (Problem 9.11.11) QR factorization of small matrices
 #Compute the QR factorization
 
 #Please represent your solution as a list of rows, such as [[1,0,0],[0,1,0],[0,0,1]]
 
-part_1_Q = ...
-part_1_R = ...
+part_1_Q = [ [6,0.49], [2, -1.84], [3, 0.245] ]
+part_1_R = [ [1,0.918], [0,1] ]
 
-part_2_Q = ...
-part_2_R = ...
+part_2_Q = [ [2,1], [2,-1], [1,0] ]
+part_2_R = [ [1,1], [0,1] ]
 
 
 
 ## 6: (Problem 9.11.12) QR Solve
-from matutil import mat2coldict, coldict2mat
+from matutil import mat2coldict, mat2rowdict, coldict2mat
 from python_lab import dict2list, list2dict
+from triangular import triangular_solve
 
 def QR_factor(A):
     col_labels = sorted(A.D[1], key=repr)
@@ -159,9 +182,16 @@ def QR_solve(A, b):
         >>> result.is_almost_zero()
         True
     '''
-    pass
+    Q, R = QR_factor(A)
+    return triangular_solve(mat2rowdict(R), sorted(A.D[1], key=repr), Q.transpose()*b) 
 
-
+'''
+A=Mat(({'a','b','c'},{'A','B'}), {('a','A'):-1, ('a','B'):2, ('b','A'):5, ('b','B'):3,('c','A'):1, ('c','B'):-2})
+b = Vec({'a','b','c'}, {'a':1,'b':-1})
+x = QR_solve(A,b)
+print("x", x)
+print("inner product", A.transpose()*(b-A*x))
+'''
 
 ## 7: (Problem 9.11.13) Least Squares Problem
 # Please give each solution as a Vec
@@ -171,16 +201,16 @@ least_squares_Q1 = listlist2mat([[.8,-0.099],[.6, 0.132],[0,0.986]])
 least_squares_R1 = listlist2mat([[10,2],[0,6.08]])
 least_squares_b1 = list2vec([10, 8, 6])
 
-x_hat_1 = ...
-
+x_hat_1 = Vec({0, 1},{1: 0.9837837837837838, 0: 1.0832432432432433})
+#orthogonal projection(residual) norm: 0.5918363542992867
 
 least_squares_A2 = listlist2mat([[3, 1], [4, 1], [5, 1]])
 least_squares_Q2 = listlist2mat([[.424, .808],[.566, .115],[.707, -.577]])
 least_squares_R2 = listlist2mat([[7.07, 1.7],[0,.346]])
 least_squares_b2 = list2vec([10,13,15])
 
-x_hat_2 = ...
-
+x_hat_2 = Vec({0, 1},{1: 2.6666666666666776, 0: 2.499999999999997})
+#orthogonal projection(residual) norm: 0.1596939895889999
 
 
 ## 8: (Problem 9.11.14) Small examples of least squares
@@ -188,14 +218,14 @@ x_hat_2 = ...
 
 #Please represent your solution as a list
 
-your_answer_1 = ...
-your_answer_2 = ...
+your_answer_1 = [0.9837837837837838, 1.0832432432432433]
+your_answer_2 = [0.9999999999999476, 3.000000000000015]
 
 
 
 ## 9: (Problem 9.11.15) Linear regression example
 #Find a and b for the y=ax+b line of best fit
 
-a = ...
-b = ...
+a = 64.92832167832181
+b = 0.6349650349650294
 
