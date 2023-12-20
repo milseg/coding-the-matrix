@@ -73,3 +73,38 @@ def backward(D):
     return backward_no_normalization(unnormalize_coefficients(len(D), D))
 
 
+#task 10.9.9
+def dictlist_helper(dlist, k):
+    return [d[k] for d in dlist]
+
+#we apply wavelets coordinates first in the rows and then in the columns
+def forward2d(vlist):
+    v1 = [forward(el) for el in vlist]
+    return {i:forward(dictlist_helper(v1, i)) for i in v1[0]}
+
+def suppress2d(D_dict, threshold):
+    return {k1:{k:(v if abs(v) > threshold else 0) for k,v in v1.items()} for k1,v1 in D_dict.items()}
+
+def sparsity2d(D_dict):
+    for i in D_dict:
+        l += len(D_dict[i])
+        for j in D_dict[i]:
+            if D_dict[i][j] > 0:
+                k+=1
+    return k/l
+
+def listdict2dict(L_dict, i):
+    return {k:v[i] for k,v in L_dict.items()}
+
+def listdict2dictlist(listdict):
+    return [{k:listdict[k][i] for k in listdict} for i in range(len(listdict[(0,0)]))]
+
+
+def backward2d(D):
+    l1 = listdict2dictlist({k:backward(D[k]) for k in D})
+    return [backward(v) for v in l1]
+
+def image_round(img):
+    return [[min(abs(round(img[i][j])), 255) for j in range(len(img[i]))] for i in range len(img)]
+
+
