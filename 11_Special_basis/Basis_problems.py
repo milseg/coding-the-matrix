@@ -86,6 +86,8 @@ def suppress2d(D_dict, threshold):
     return {k1:{k:(v if abs(v) > threshold else 0) for k,v in v1.items()} for k1,v1 in D_dict.items()}
 
 def sparsity2d(D_dict):
+    l = 0
+    k = 0
     for i in D_dict:
         l += len(D_dict[i])
         for j in D_dict[i]:
@@ -105,6 +107,20 @@ def backward2d(D):
     return [backward(v) for v in l1]
 
 def image_round(img):
-    return [[min(abs(round(img[i][j])), 255) for j in range(len(img[i]))] for i in range len(img)]
+    return [[min(abs(round(img[i][j])), 255) for j in range(len(img[i]))] for i in range (len(img))]
 
+from image import file2image, color2gray, image2display, image2file
+def task10_9_17():
+    x = color2gray(file2image('flag.png'))
+    image2display(x)
+    image2display(image_round(backward2d(forward2d(x))))
+
+#task 10.9.18
+def test_sparsity2d(t):
+    x = color2gray(file2image('flag.png'))
+    x = forward2d(x)
+    print("sparsity before", sparsity2d(x))
+    x = suppress2d(x, t)
+    print("sparsity after threshold ", t, " ", sparsity2d(x))
+    return x
 
