@@ -3,8 +3,9 @@
 
 from mat import Mat
 from vec import Vec
+from vecutil import list2vec
 from math import sqrt
-from matutil import listlist2mat
+
 
 
 ## 1: (Problem 11.8.1) Procedure for computing squared Frobenius norm
@@ -32,35 +33,33 @@ Q = listlist2mat([ [1,0], [0,1], [0,0] ])
 # Part 1
 vT_x_1 = [ 2, 1 ]
 Sigma_vT_x_1 = [ 4, 1 ]
-U_Sigma_vT_x_1 = [ 1, 4, 0 ]
+U_Sigma_vT_x_1 = [ ... ]
 
 # Part 2
-vT_x_2 = [ 0, 2 ]
-Sigma_vT_x_2 = [ 0, 2 ]
-U_Sigma_vT_x_2 = [ 2, 0, 0 ]
+vT_x_2 = [ ... ]
+Sigma_vT_x_2 = [ ... ]
+U_Sigma_vT_x_2 = [ ... ]
 
 
 
 ## 4: (Problem 11.8.4) The SVD of a small simple matrix
 # A.D = ({'r1','r2'},{'c1','c2'})
 # Row and column labels of SA should be {0,1, ...}
-UA = Mat(({0, 1},{0, 1}),{(0,0): 1, (0,1): 0, (1,0): 0, (1,1): 1})
-SA = Mat(({0, 1},{0, 1})), {(0,0): 3, (0,1): 0, (1,0): 0, (1,1): 1})
-VA = Mat(({0, 1},{0, 1})), {(0,0): 1, (0,1): 0, (1,0): 0, (1,1): -1})
-
+UA = Mat(({...},{...}),{...})
+SA = Mat(({...},{...}),{...})
+VA = Mat(({...},{...}),{...})
 
 # B.D = ({'r1','r2'},{'c1','c2'})
 # Row- and column-labels of SB should be {0,1, ...}
-UB = Mat(({0, 1},{0, 1}),{(0,0): 1, (0,1): 0, (1,0): 0, (1,1): 1})
-SB = Mat(({0, 1},{0, 1})), {(0,0): 3, (0,1): 0, (1,0): 0, (1,1): 4})
-VB = Mat(({0, 1},{0, 1})), {(0,0): 1, (0,1): 0, (1,0): 0, (1,1): 1})
-
+UB = Mat(({...},{...}),{...})
+SB = Mat(({...},{...}),{...})
+VB = Mat(({...},{...}),{...})
 
 # C.D = ({'r1','r2','r3'},{'c1','c2'})
 # Row- and column-labels of SC should be {0,1, ...}
-UC = Mat(({0, 1, 2},{0, 1}),{(0,0): 1, (0,1): 0, (1,0): 0, (1,1): 1, (2,0): 0, (2,1): 0})
-SC = Mat(({0, 1},{0, 1})), {(0,0): 4, (0,1): 0, (1,0): 0, (1,1): 0})
-VC = Mat(({0, 1},{0, 1})), {(0,0): 0, (0,1): 1, (1,0): 1, (1,1): 0})
+UC = Mat(({...},{...}),{...})
+SC = Mat(({...},{...}),{...})
+VC = Mat(({...},{...}),{...})
 
 
 
@@ -68,18 +67,12 @@ VC = Mat(({0, 1},{0, 1})), {(0,0): 0, (0,1): 1, (1,0): 1, (1,1): 0})
 # In both parts, your matrices must use 0, 1, 2, ... , n as the indices.
 
 # Part 1
-u = listlist2mat([ [0, -sqrt(0.5)], [sqrt(0.8), 0], [0, -sqrt(0.5)], [sqrt(0.2), 0] ])
-s = Mat(({0,1},{0,1}), {(0,0): sqrt(5), (1,1): 2})
-vt = listlist2mat([ [0,1,0], [-sqrt(0.5), 0, -sqrt(0.5)] ])
-G1 = u*s
-H1 = vt
+G1 = ...
+H1 = ...
 
 # Part 2
-u = listlist2mat([ [sqrt(2)/2, 0], [sqrt(2)/2, 0], [0, 0], [0, -1] ])
-s = Mat(({0,1},{0,1}), {(0,0): sqrt(2), (1,1): 1})
-vt = listlist2mat([ [0,0,1], [0,-1,0]  ])
-G2 = u*s
-H2 = vt
+G2 = ...
+H2 = ...
 
 
 
