@@ -65,19 +65,20 @@ p3_part_b_eigenvalue2 = 5
 
 ## 4: (Problem 12.14.11) Markov chains and eigenvectors
 # a Mat
-transition_matrix = ...
+transition_matrix = Mat(({'S','R','F','W'}, {'S','R','F','W'}), {('S','S'): 0.5, ('S', 'R'): 0.2, ('S', 'W'): 0.1, ('R', 'S'): 0.2, ('R', 'R'): 0.6, ('F', 'R'): 0.2, ('F', 'F'): 0.4, ('F', 'W'): 0.8, ('W', 'S'): 0.3, ('W', 'F'): 0.6, ('W', 'W'): 0.1})
 
 # a Vec
-definitely_windy_vector = ...
+definitely_windy_vector = Vec({'S', 'R', 'F', 'W'}, {'W': 1.0})
 
-day_after_windy = ...
+day_after_windy = Vec({'R', 'F', 'W', 'S'},{'S': 0.1, 'R': 0.0, 'F': 0.8, 'W': 0.1})
 
-uniform = ...
-day_after_uniform = ...
+uniform = Vec({'S', 'R', 'F', 'W'}, {'S': 0.25, 'R': 0.25, 'F': 0.25, 'W': 0.25})
 
-four_hundred_days_from_now = ...
+day_after_uniform = Vec({'R', 'F', 'W', 'S'},{'S': 0.19999999999999998, 'R': 0.2, 'F': 0.35000000000000003, 'W': 0.24999999999999997})
+
+four_hundred_days_from_now = Vec({'R', 'F', 'W', 'S'},{'S': 0.0909090909090911, 'R': 0.04545454545454557, 'F': 0.5000000000000009, 'W': 0.3636363636363643})
 
 # Be clever here; no computation is needed:
-eigenvalue = ...
-eigenvector = ... # as an instance of Vec
+eigenvalue = 1.0
+eigenvector = four_hundred_days_from_now # as an instance of Vec
 
