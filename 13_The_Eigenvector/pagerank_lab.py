@@ -136,9 +136,11 @@ def power_method_biased(A1, i, r):
     return v
 
 
-p_sport = ...
-sporty_results_for_jordan = ...
-sporty_results_for_obama  = ...
-sporty_results_for_tiger  = ...
-sporty_results_for_matrix = ...
+links = pagerank.read_data()
+make_Markov(links)
+p_sport = power_method_biased(links, 10, "sport")
+sporty_results_for_jordan = ['2007', '2006', '2005', 'basketball', 'paris']
+sporty_results_for_obama  = ['united states', 'president of the united states', 'chicago', 'democratic party (united states)', 'illinois']
+sporty_results_for_tiger  = ['france', 'england', '2006', 'india', 'ireland']
+sporty_results_for_matrix = ['1999', 'internet', 'religion', 'sydney', '1965']
 
