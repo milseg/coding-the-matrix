@@ -17,7 +17,7 @@ def simplex_step(A, b, c, R_square, show_bases=False):
     # Compute a possibly feasible dual solution
     y_square = solve(A_square.transpose(), c) #compute entries with labels in R_square
     y = Vec(R, y_square.f) #Put in zero for the other entries
-    if min(y.values()) >= -1e-10: return ('OPTIMUM', x) #found optimum!
+    if min(y.f.values()) >= -1e-10: return ('OPTIMUM', x) #found optimum!
     R_leave = {i for i in R if y[i]< -1e-10} #labels at which y is negative
     r_leave = min(R_leave, key=hash) #choose first label at which y is negative
     # Compute the direction to move
@@ -31,7 +31,7 @@ def simplex_step(A, b, c, R_square, show_bases=False):
     delta_dict = {r:(b[r] - Ax[r])/(Aw[r]) for r in R_enter}
     delta = min(delta_dict.values())
     # Compute the new tight constraint
-    r_enter = min({r for r in R_enter if delta_dict[r] == delta}, key=hash)[0]
+    r_enter = min({r for r in R_enter if delta_dict[r] == delta}, key=hash)
     # Update the set representing the basis
     R_square.discard(r_leave)
     R_square.add(r_enter)
@@ -67,6 +67,7 @@ def dict_union(*args):
 def find_vertex(A, b, R_square):
     assert len(A.D[1]) == len(R_square)
     def new_name(r): return (r, -1)
+    n = len(R_square)
     A_square = Mat((R_square, A.D[1]), {(r,c):A[r,c] for r,c in A.f if r in R_square})
     b_square = Vec(R_square, {k:b[k] for k in R_square})
     x = solve(A_square, b_square)
@@ -80,7 +81,7 @@ def find_vertex(A, b, R_square):
     c = Vec(A.D[1].union(extra), {e:1 for e in extra})
     answer= optimize(A_with_extra, b_with_extra, c, new_R_square)
     if answer is None: return False
-    basis_candidates=list(new_R_square | D[0])
+    basis_candidates=list(new_R_square | A.D[0])
     R_square.clear()
     R_square.update(set(basis_candidates[:n]))
     return True

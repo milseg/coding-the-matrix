@@ -1,89 +1,69 @@
-from cancer_data import read_training_data
+from solver import solve
+from mat import Mat
 from vec import Vec
-from matutil import mat2rowdict
+from matutil import listlist2mat
+from vecutil import list2vec
+from simplex import optimize, find_vertex
 
-print("reading training data")
-feat_cols = {'area(worst)','smoothness(worst)', 'texture(mean)'}
-A,b = read_training_data('train.data', feat_cols) 
-print("training data read")
-
-for x in b.D:
-    print("b first element ", x)
-    break
-
-#bypass tasks 13.13.1 to 13.13.5
-
-nonNegCons = {-x for x in b.D}
-A.D[0] = A.D[0].union(nonNegCons)
-A.D[1] = A.D[1].union(b.D).union('gamma')
+#13.16.2
+def find_move_helper(A, r):
+    return solve(A, Vec(A.D[0], {r:1}))
 
 
-def multiply_matrix_row(A, i, s):
-    for j in A.D[1]:
-        A[i,j] = A[i,j]*s
+#13.16.3
+def find_move_direction(A, x, r):
+    return find_move_helper(A, r)
 
 
-for i in b.D:
-    if b[i] == 1:
-        A[i, 'gamma'] = -1
-    else: #b[i] == -1
-        multiply_matrix_row(A, i, -1)
-        A[i, 'gamma'] = 1
-    A[i,i] = 1
-    A[-i,i] = 1
-    b[i] = 1
+#13.16.4
+def find_move(A, x, r):
+    lb = float('inf')
+    w = find_move_direction(A, x, r)
+    for i in A.D[0]:
+        if w[i] < 0:
+            lb = min(lb, abs(x[i]/w[i]))
+    return (w,lb)
 
 
+r = find_move_helper(listlist2mat([ [1, 1, 0], [0, 1, 1], [1, 0, 1] ]), 2)
+print(r)
 
-c = Vec(A.D[1], {i: 1 for i in b.D})
-R_square = b.D
-rem = len(A.D[1])-len(R_square)
-for x in nonNegCons:
-    R_square = R_square.add(x)
-    rem = rem - 1
-    if rem == 0:
-        break
 
-b.D = b.D.union(nonNegCons)
+(r,lb) = find_move(listlist2mat([ [1, 1, 0], [0, 1, 1], [1, 0, 1] ]), list2vec([2,4,6]), 2)
+print(r)
+print("lambda", lb)
 
-#find vertex
+#13.16.5
+'''
+xi: Number of chocolates of type i
+profit = x1 + 1.6*x2
+constraints:
+(peanuts) 50*x1 <= 200
+(chocolate) 100*x1 + 150*x2 <= 1000
+(caramel) 50*x2 <= 300
+(sugar) 50*x1 + 30*x2 <= 300
+'''
+A = listlist2mat([ [-50, 0], [-100, -150], [0, -50], [-50, -30], [1, 0], [0, 1] ])
+b = list2vec([-200,-1000,-300,-300,0,0])
+c = list2vec([-1, -1.6])
+R_square = {4,5}
+r = optimize(A, b, c, R_square)
+print("simplex chocolate solution", r)#1 n&n and 2 venus
+
+#13.16.6
+'''
+xi: Number of visits to city i
+profit = 35*xa + 50*xb + 55*xc
+(kids city b) xb <= 3
+(expenses) 20*xa + 30*xb + 35*xc <= 195
+'''
+A = listlist2mat([ [0, -1, 0], [-20, -30, -35], [1,0,0], [0,1,0], [0,0,1] ])
+b = list2vec([-3, -195, 0, 0, 0])
+c = list2vec([-35, -50, -55])
+R_square = {0,1,2}
 if not find_vertex(A, b, R_square):
-    print("couldnt find a vertex")
+    print("vertex not found")
     exit()
 
-print("vertex found")
-
-sol = optimize(A, b, c, R_square)
-
-
-#Task 13.13.6
-w = Vec(feat_cols, {f:sol[f] for f in feat_cols})
-gamma = sol['gamma']
-
-
-def C(feature_vector):
-    global w, gamma
-    return 1 if w*feature_vector > gamma else -1
-
-
-def test_data(path):
-    A,b = read_training_data(path, feat_cols)
-    errors = 0
-    feats = mat2rowdict(A)
-    sz = len(feats)
-    print("reading ", sz, " records")
-    for i in feats:
-        if c(feats[i]) != b[i]:
-            errors += 1
-    print("errors ", errors, " (", (errors/sz)*100, "%)")
-
-
-#Task 13.13.7 - Training data test
-def test_training_data(path):
-    test_data('train.data')
-
-#Task 13.13.8 - Validation data test
-def test_validation_data(path):
-    test_data('validate.data')
-
-
+r = optimize(A, b, c, R_square)
+print("simplex ice-cream van solution", r)

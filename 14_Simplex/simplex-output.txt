@@ -1,0 +1,3 @@
+(value:  435.2764247082871 ) 1
+
+(value:  230.42149162235475 ) couldnt find a vertex
