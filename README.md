@@ -9,7 +9,7 @@ Each chapter’s work is setup within a folder with a number indicating the sequ
 
 So folder **1_The_Function** is referred to programming labs contained in the chapter **The Function**, which is the first(number one) to appear in the book.
 
-Generally, the main files for the chapter has the same name of the chapter followed by the word problems. **i. e.** Folder **1_The_Function** contains the main file **The_Function_problems.py.** Other core solution files are named with ****the title of the corresponding lab
+Generally, the main files for the chapter has the same name of the chapter followed by the word problems. **i. e.** Folder **1_The_Function** contains the main file **The_Function_problems.py.** Other core solution files are named with the title of the corresponding lab itself.
 
 # Comments
 
