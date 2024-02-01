@@ -18,6 +18,7 @@ Generally, the main files for the chapter has the same name of the chapter follo
 - Instead of separating code for **tasks 13.13.1 to 13.13.5**, a single block solves all of that range and is implemented on the file `[The_Linear_Program_learning.py](14_The_Linear_Program/The_Linear_Program_learning.py)`
 - Each chapter lab is isolated into a folder which required me to copy auxiliary files repeatedly. I plan to replace this approach moving these files to a single folder and setting them up into python modules search path. Observations about the core files naming are stated in the previous section to help you find the relevant code
 - Although python current version is above from 3.6, solve module used between the labs will require a lower version. I recommend you using `[pyenv](https://github.com/pyenv/pyenv)` to manage older python installations.
+- File 13_The_Eigenvector/data/inverseindex has been removed from commit history because of github file size constraint. You can find it at `[resources](http://resources.codingthematrix.com/inverseindex)`
 - It is rewarding to solve this book labs. It would give you a new perspective beyond the abstract and theoretical math lessons you could have elsewhere. I recommend!
 
 # References
